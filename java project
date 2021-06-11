@@ -1,0 +1,69 @@
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.util.Scanner;
+
+public class Main11 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);		
+		System.out.println("Please enter youre password to continue: ");
+		
+		String password = sc.nextLine();	
+		
+		 
+		 try {
+		
+		
+		MessageDigest md;
+		
+		
+			if ((password.length()>10) &&( password.indexOf('@')>-1 || password.indexOf('!')>-1 ||password.indexOf('#')>-1||password.indexOf('$')>-1 ||password.indexOf('.')>-1) 
+				&&( password.indexOf('a')>-1 || password.indexOf('b')>-1 ||password.indexOf('c')>-1||password.indexOf('d')>-1 ||password.indexOf('e')>-1
+				||password.indexOf('f')>-1 || password.indexOf('g')>-1 ||password.indexOf('h')>-1||password.indexOf('i')>-1 ||password.indexOf('j')>-1
+				|| password.indexOf('k')>-1 || password.indexOf('l')>-1 ||password.indexOf('m')>-1||password.indexOf('n')>-1 ||password.indexOf('o')>-1
+				|| password.indexOf('p')>-1 || password.indexOf('q')>-1 ||password.indexOf('r')>-1||password.indexOf('s')>-1 ||password.indexOf('t')>-1
+				|| password.indexOf('u')>-1 || password.indexOf('v')>-1 ||password.indexOf('w')>-1||password.indexOf('x')>-1 ||password.indexOf('y')>-1
+				|| password.indexOf('z')>-1 )&&( password.indexOf('A')>-1 ||password.indexOf('B')>-1||password.indexOf('C')>-1 ||password.indexOf('D')>-1
+				|| password.indexOf('E')>-1 || password.indexOf('F')>-1 ||password.indexOf('G')>-1 ||password.indexOf('H')>-1
+				|| password.indexOf('I')>-1 || password.indexOf('J')>-1 ||password.indexOf('K')>-1||password.indexOf('L')>-1 ||password.indexOf('M')>-1
+				|| password.indexOf('N')>-1 || password.indexOf('O')>-1 ||password.indexOf('P')>-1||password.indexOf('Q')>-1 ||password.indexOf('R')>-1
+				|| password.indexOf('S')>-1 || password.indexOf('T')>-1 ||password.indexOf('U')>-1 || password.indexOf('V')>-1||password.indexOf('W')>-1 || password.indexOf('X')>-1||
+				password.indexOf('Y')>-1 || password.indexOf('Z')>-1)
+				 && (password.indexOf('1')>-1 || password.indexOf('2')>-1 ||password.indexOf('3')>-1||password.indexOf('4')>-1 ||password.indexOf('5')>-1
+				||password.indexOf('6')>-1 || password.indexOf('7')>-1 ||password.indexOf('8')>-1||password.indexOf('9')>-1 ))
+				
+				{
+		 // Select the message digest for the hash computation -> SHA-256
+		  md = MessageDigest.getInstance("SHA-256");
+
+		  // Generate the random salt
+		   SecureRandom random = new SecureRandom();
+		   byte[] salt = new byte[16];
+		   random.nextBytes(salt);
+
+		   // Passing the salt to the digest for the computation
+		   md.update(salt);
+
+		   // Generate the salted hash
+		    byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+		     StringBuilder sb = new StringBuilder();
+		     for (byte b : hashedPassword)
+		          sb.append(String.format("%02x", b));
+
+		      System.out.println(sb);}
+			else {
+				System.out.println("small String");
+				
+			}
+		  } catch (Exception e)
+		  {
+		     System.out.println("error");
+		  }
+		  }
+		 
+		
+
+	}
+
